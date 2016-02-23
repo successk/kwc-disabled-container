@@ -1,0 +1,27 @@
+{
+  "name": "kwc-disabled-container",
+  "version": "0.1.0",
+  "description": "Polymer component used to disable a section (cannot be clicked and blur all inputs)",
+  "license": "MIT",
+  "main": "kwc-disabled-container.html",
+  "keywords": [
+    "polymer",
+    "web-component",
+    "container"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "homepage": "https://github.com/successk/kwc-disabled-container",
+  "authors": [
+    "Gaëtan Rizio <gaetan@rizio.fr>"
+  ],
+  "moduleType": []
+}

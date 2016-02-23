@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+  Custom styles:
+    * --kwc-disabled-container-shadow (default {})
+  
+  Properties:
+    * disabled: The block is disabled
+-->
+<dom-module id="kwc-disabled-container">
+  <template>
+    <style>
+      .container {
+        position: relative;
+      }
+      
+      .shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        @apply(--kwc-disabled-container-shadow);
+      }
+    </style>
+
+    <div class="container">
+      <div class="shadow" hidden$="[[!disabled]]"></div>
+      <content></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'kwc-disabled-container',
+      
+      properties: {
+        disabled: {
+          type: Boolean,
+          value: false,
+          observer: "_disabledChanged"
+        }
+      },
+        
+      attached: function() {
+        var that = this
+        // We remove focus on internal element, but not on other elements
+        document.addEventListener('focus',function(e){
+          // firefox compatibility - use focusin when possible
+          var current = e.target
+          while (current != null && current !== that) {
+            current = current.parentNode
+          }
+          if (current !== null) {
+            if (that.disabled) {
+              e.target.blur()
+            }
+          }
+        }, true);
+      },
+      
+      _disabledChanged: function(value) {
+        if (value) {
+          Array.from(this.querySelectorAll("*")).forEach(function(elt){
+            if (elt.blur) {
+              elt.blur()
+            }
+          })
+        }
+      }
+    })
+  </script>
+</dom-module>

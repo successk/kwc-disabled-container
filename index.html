@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>&lt;kwc-disabled-container&gt;</title>
+
+  <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="kwc-disabled-container.html">
+  <style>
+    #content {
+      width: 1200px;
+      height: 100vh;
+      margin: auto;
+    }
+    
+    .flex {
+      display: flex;
+      width: 100%;
+    }
+    
+    .flex input {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <kwc-disabled-container disabled>
+      <h1>Disabled container</h1>
+
+      <p>
+        This container is disabled. You cannot copy this text.
+      </p>
+    </kwc-disabled-container>
+    <kwc-disabled-container>
+      <h1>Enabled form</h1>
+
+      <div class="flex">
+        <input type="text" placeholder="This input is active, you can edit it">
+      </div>
+    </kwc-disabled-container>
+    <kwc-disabled-container disabled>
+      <h1>Disabled form</h1>
+
+      <div class="flex">
+        <input type="text" placeholder="This input is not active, you cannot edit it">
+      </div>
+    </kwc-disabled-container>
+    
+    <kwc-disabled-container id="changeable" disabled>
+      <h1>Disabled form</h1>
+
+      <div class="flex">
+        <input type="text" placeholder="This input is not active, you cannot edit it">
+      </div>
+    </kwc-disabled-container>
+    <button id="change">Remove disabled for 3s</button>
+  </div>
+  
+  <script>
+    document.querySelector("#change").addEventListener("click", function() {
+      var changeable = document.querySelector("#changeable")
+      if (changeable.hasAttribute("disabled")) {
+        changeable.removeAttribute("disabled")
+        setTimeout(function(){
+          changeable.setAttribute("disabled", true)
+        }, 3000)
+      } else {
+        changeable.setAttribute("disabled", true)
+      }
+    })
+  </script>
+</body>
+
+</html>
